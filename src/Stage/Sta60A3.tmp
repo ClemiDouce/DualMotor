@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv7uducuauva6"]
+
+[ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="1_schre"]
+[ext_resource type="Texture2D" uid="uid://ccn20n6vxnlb3" path="res://assets/object/flag.png" id="2_rny6g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g7gi7"]
+radius = 7.0
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_schre")]
+
+[node name="Object" type="Area2D" parent="."]
+position = Vector2(48, 58)
+
+[node name="Sprite2D" type="Sprite2D" parent="Object"]
+position = Vector2(0, -5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rny6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_g7gi7")

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://mt3051ftkf07"]
+
+[ext_resource type="Script" path="res://src/Player/Player.gd" id="1_k68jq"]
+[ext_resource type="SpriteFrames" uid="uid://1hwjh1vttllh" path="res://src/Player/player_1_spriteframe.tres" id="2_wi8pu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dibx"]
+size = Vector2(13, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbiij"]
+size = Vector2(24, 25)
+
+[node name="Player1" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_k68jq")
+player_number = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = ExtResource("2_wi8pu")
+animation = &"run_with"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_7dibx")
+
+[node name="ObjectMarker" type="Marker2D" parent="."]
+position = Vector2(0, -19)
+
+[node name="ThrowMarker" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="GrabArea" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("RectangleShape2D_nbiij")
+
+[node name="StunSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+
+[node name="StunDelay" type="Timer" parent="."]
+one_shot = true

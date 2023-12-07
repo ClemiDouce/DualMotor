@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://c61yxsimw7ne2"]
+
+[ext_resource type="Script" path="res://src/Object/object.gd" id="1_aollq"]
+[ext_resource type="Texture2D" uid="uid://dnxssue8xjw8m" path="res://assets/object/pannel.png" id="2_8fpad"]
+[ext_resource type="Texture2D" uid="uid://nsteebjmstbe" path="res://assets/object/decompte.png" id="3_ld5p2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g7gi7"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt2pj"]
+atlas = ExtResource("3_ld5p2")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f15m5"]
+atlas = ExtResource("3_ld5p2")
+region = Rect2(18, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq0p8"]
+atlas = ExtResource("3_ld5p2")
+region = Rect2(36, 0, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_roego"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt2pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f15m5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kq0p8")
+}],
+"loop": false,
+"name": &"decompte",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ucuqt"]
+radius = 33.0
+
+[node name="Object" type="Area2D"]
+script = ExtResource("1_aollq")
+object_type = "BOMB"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_8fpad")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_g7gi7")
+
+[node name="DelayLabel" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_roego")
+animation = &"decompte"
+frame = 2
+frame_progress = 1.0
+
+[node name="ExplodeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplodeArea"]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_ucuqt")
+
+[connection signal="animation_finished" from="DelayLabel" to="." method="_on_delay_label_animation_finished"]
+[connection signal="frame_changed" from="DelayLabel" to="." method="_on_delay_label_frame_changed"]
