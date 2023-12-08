@@ -39,7 +39,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ucuqt"]
 radius = 33.0
 
-[node name="Object" type="Area2D"]
+[node name="Object" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_aollq")
 object_type = "BOMB"
 
@@ -63,6 +66,7 @@ frame = 2
 frame_progress = 1.0
 
 [node name="ExplodeArea" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplodeArea"]
 visible = false

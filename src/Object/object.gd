@@ -1,10 +1,9 @@
-extends Area2D
+extends CharacterBody2D
 class_name MotorPart
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var delay_label: AnimatedSprite2D = $DelayLabel
 
-var velocity : Vector2 = Vector2.ZERO
 var FRICTION = 250
 
 var mounted = false
@@ -23,7 +22,7 @@ func _process(delta: float) -> void:
 			if object_type == "BOMB":
 				start_timer()
 	
-	self.global_position += velocity * delta
+	move_and_slide()
 	
 	self.velocity = self.velocity.move_toward(Vector2.ZERO, delta * FRICTION)
 	
@@ -43,12 +42,8 @@ func bomb_explode():
 			bombed.get_bombed(self.position)
 	queue_free()
 
-func _on_delay_label_frame_changed() -> void:
-	print("tic")
-
 
 func _on_delay_label_animation_finished() -> void:
-	#await get_tree().create_timer(1).timeout
 	delay_label.visible = false
 	bomb_explode()
 	

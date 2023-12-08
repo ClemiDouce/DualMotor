@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://mt3051ftkf07"]
+[gd_scene load_steps=6 format=3 uid="uid://mt3051ftkf07"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1_k68jq"]
 [ext_resource type="SpriteFrames" uid="uid://1hwjh1vttllh" path="res://src/Player/player_1_spriteframe.tres" id="2_wi8pu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dibx"]
-size = Vector2(13, 18)
+size = Vector2(13, 7)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbiij"]
-size = Vector2(24, 25)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wmxil"]
+radius = 17.1317
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tlgey"]
+radius = 30.0
 
 [node name="Player1" type="CharacterBody2D"]
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_k68jq")
 player_number = 1
@@ -21,8 +25,9 @@ animation = &"run_with"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_7dibx")
+debug_color = Color(0.133333, 0.317647, 0.701961, 0.419608)
 
 [node name="ObjectMarker" type="Marker2D" parent="."]
 position = Vector2(0, -19)
@@ -32,9 +37,20 @@ position = Vector2(0, -8)
 
 [node name="GrabArea" type="Area2D" parent="."]
 position = Vector2(0, -8)
+collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
-shape = SubResource("RectangleShape2D_nbiij")
+scale = Vector2(1.40239, 1.27261)
+shape = SubResource("CircleShape2D_wmxil")
+
+[node name="DetectArea" type="Area2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource("CircleShape2D_tlgey")
+debug_color = Color(0.309804, 0.701961, 0.32549, 0.419608)
 
 [node name="StunSprite" type="AnimatedSprite2D" parent="."]
 visible = false

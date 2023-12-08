@@ -41,6 +41,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("action_1"):
 		grab_object()
 
+func is_occupied():
+	return object != null
+
 func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 4):
 	#TODO: Effet de stun de bombe
 	var bomb_direction = bomb_position.direction_to(self.position)
@@ -48,12 +51,9 @@ func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 
 	is_stunned = true
 	$StunDelay.start(stun_delay)
 	
-
-
-
 func grab_object():
 	if object == null: # Si pas d'objet dans les mains
-		var pot_object = grab_area.get_overlapping_areas()
+		var pot_object = grab_area.get_overlapping_bodies()
 		print(pot_object)
 		if pot_object:
 			for x in pot_object:
