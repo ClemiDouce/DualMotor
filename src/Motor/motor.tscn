@@ -1,64 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb38xyy565yi0"]
+[gd_scene load_steps=9 format=3 uid="uid://cb38xyy565yi0"]
 
 [ext_resource type="Texture2D" uid="uid://bklw20p1rraop" path="res://assets/motor_base.png" id="1_8nx4d"]
+[ext_resource type="Script" path="res://src/Motor/motor.gd" id="1_mhqng"]
 [ext_resource type="PackedScene" uid="uid://cbgmgw7oy8qic" path="res://src/Motor/anchor_element.tscn" id="2_gh1e1"]
-[ext_resource type="PackedScene" uid="uid://c61yxsimw7ne2" path="res://src/Object/object.tscn" id="2_yyueo"]
 
-[node name="Motor" type="Node2D"]
-position = Vector2(24, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_220f4"]
+size = Vector2(24, 14)
 
-[node name="TopLeft" type="Marker2D" parent="."]
-position = Vector2(-6, -8)
-gizmo_extents = 4.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cutiv"]
+size = Vector2(1, 1)
 
-[node name="Object" parent="TopLeft" instance=ExtResource("2_yyueo")]
-object_type = "FLAG"
+[sub_resource type="Gradient" id="Gradient_r5nvt"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.173554, 0.380165, 0.632231, 0.896694)
+colors = PackedColorArray(0.26804, 0.898039, 0.220248, 1, 1, 0.073366, 0.0136428, 1, 1, 0.213261, 0.968169, 1, 0.115564, 0.145125, 1, 1, 0.6048, 0.91856, 0.96, 1)
 
-[node name="AnchorElement" parent="TopLeft" instance=ExtResource("2_gh1e1")]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_emcgl"]
+gradient = SubResource("Gradient_r5nvt")
 
-[node name="TopRight" type="Marker2D" parent="."]
-position = Vector2(6, -8)
-gizmo_extents = 4.0
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tim46"]
+particle_flag_disable_z = true
+angle_min = -240.0
+angle_max = 240.0
+direction = Vector3(0, -1, 0)
+spread = 20.0
+flatness = 0.04
+initial_velocity_min = 80.0
+initial_velocity_max = 120.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+gravity = Vector3(0, 200, 0)
+linear_accel_min = -20.84
+linear_accel_max = 12.5
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_emcgl")
+hue_variation_min = -0.99
+hue_variation_max = 1.0
 
-[node name="Object" parent="TopRight" instance=ExtResource("2_yyueo")]
-object_type = "MUSHROOM"
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_mhqng")
 
-[node name="AnchorElement2" parent="TopRight" instance=ExtResource("2_gh1e1")]
-
-[node name="Left" type="Marker2D" parent="."]
-position = Vector2(-12, 1)
-rotation = -3.14159
-gizmo_extents = 4.0
-
-[node name="Object" parent="Left" instance=ExtResource("2_yyueo")]
-rotation = 1.5708
-object_type = "PANNEL"
-
-[node name="AnchorElement3" parent="Left" instance=ExtResource("2_gh1e1")]
-rotation = 3.14159
-
-[node name="Down" type="Marker2D" parent="."]
-position = Vector2(0, 8)
-rotation = 3.14159
-gizmo_extents = 4.0
-
-[node name="Object" parent="Down" instance=ExtResource("2_yyueo")]
-object_type = "LEVER"
-
-[node name="AnchorElement4" parent="Down" instance=ExtResource("2_gh1e1")]
-rotation = -3.14159
-
-[node name="Right" type="Marker2D" parent="."]
-position = Vector2(12, 0)
-rotation = 1.5708
-gizmo_extents = 4.0
-
-[node name="Object" parent="Right" instance=ExtResource("2_yyueo")]
-object_type = "LEVER"
-
-[node name="AnchorElement5" parent="Right" instance=ExtResource("2_gh1e1")]
-rotation = -1.5708
-
-[node name="Base" type="Sprite2D" parent="."]
-scale = Vector2(1.44444, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.66667, 1)
 texture = ExtResource("1_8nx4d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_220f4")
+
+[node name="AnchorTop1" parent="." instance=ExtResource("2_gh1e1")]
+position = Vector2(-8, -7)
+
+[node name="AnchorTop2" parent="." instance=ExtResource("2_gh1e1")]
+position = Vector2(8, -7)
+
+[node name="AnchorDown" parent="." instance=ExtResource("2_gh1e1")]
+position = Vector2(0, 7)
+rotation = 3.14159
+
+[node name="AnchorLeft" parent="." instance=ExtResource("2_gh1e1")]
+position = Vector2(-13, 0)
+rotation = 4.71238
+
+[node name="AnchorRight" parent="." instance=ExtResource("2_gh1e1")]
+position = Vector2(13, 0)
+rotation = 1.5708
+
+[node name="DetectDropZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectDropZone"]
+shape = SubResource("RectangleShape2D_cutiv")
+
+[node name="ConfettiGenerator" type="GPUParticles2D" parent="."]
+position = Vector2(0, -7)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_tim46")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.51

@@ -1,0 +1,85 @@
+{
+	"categories": [
+		{
+			"uuid": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"title": "Task",
+			"color": "70bafa"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "b4473e5e-c3fb-4031-a576-0410e5ac43d2",
+			"title": "Todo",
+			"tasks": [
+				"0259e41d-93b1-476f-9df5-04a0c5ad73c5",
+				"9108f5b9-bae4-4ad1-99d6-68d3ed83afca"
+			]
+		},
+		{
+			"uuid": "1ce4213e-6412-490c-ae2b-be9991d2e3df",
+			"title": "Doing",
+			"tasks": [
+				"8227eed7-549c-405c-addb-031c02da8863"
+			]
+		},
+		{
+			"uuid": "7831d6e5-e807-435b-aced-f141294ef9ef",
+			"title": "Done",
+			"tasks": [
+				"3838e465-47b5-4c7a-9326-bfa7893735b1"
+			]
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "3838e465-47b5-4c7a-9326-bfa7893735b1",
+			"title": "Pouvoir monter une pièce sur un moteur",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
+		},
+		{
+			"uuid": "8227eed7-549c-405c-addb-031c02da8863",
+			"title": "Prendre le moteur",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
+		},
+		{
+			"uuid": "0259e41d-93b1-476f-9df5-04a0c5ad73c5",
+			"title": "Deposer le moteur dans une zone prévu a cette effet",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": [
+				{
+					"details": "Creer la zone de depo",
+					"done": false
+				},
+				{
+					"details": "rendre le moteur portable",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "9108f5b9-bae4-4ad1-99d6-68d3ed83afca",
+			"title": "Checker si le moteur est correct ou non",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"b4473e5e-c3fb-4031-a576-0410e5ac43d2"
+			],
+			[
+				"1ce4213e-6412-490c-ae2b-be9991d2e3df"
+			],
+			[
+				"7831d6e5-e807-435b-aced-f141294ef9ef"
+			]
+		]
+	}
+}

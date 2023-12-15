@@ -6,7 +6,7 @@ class_name MotorPart
 
 var FRICTION = 250
 
-var mounted = false
+var is_mounted = false
 var throwed = false
 
 @export_enum("FLAG", "CACTUS", "PISTON", "SPIKE", "KEY", "PANNEL", "LEVER", "MUSHROOM", "BOMB") var object_type : String
@@ -36,7 +36,6 @@ func start_timer():
 
 func bomb_explode():
 	var to_bomb : Array[Node2D] = $ExplodeArea.get_overlapping_bodies()
-	to_bomb
 	if to_bomb:
 		for bombed in to_bomb:
 			bombed.get_bombed(self.position)

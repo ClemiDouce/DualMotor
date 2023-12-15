@@ -12,7 +12,7 @@ radius = 17.1317
 [sub_resource type="CircleShape2D" id="CircleShape2D_tlgey"]
 radius = 30.0
 
-[node name="Player1" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_k68jq")
@@ -37,7 +37,8 @@ position = Vector2(0, -8)
 
 [node name="GrabArea" type="Area2D" parent="."]
 position = Vector2(0, -8)
-collision_mask = 34
+collision_layer = 0
+collision_mask = 66
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
 scale = Vector2(1.40239, 1.27261)

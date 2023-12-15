@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbgmgw7oy8qic"]
+[gd_scene load_steps=3 format=3 uid="uid://cbgmgw7oy8qic"]
+
+[ext_resource type="Script" path="res://src/Motor/anchor_element.gd" id="1_ixufm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5d5br"]
 size = Vector2(4, 4)
@@ -6,6 +8,13 @@ size = Vector2(4, 4)
 [node name="AnchorElement" type="StaticBody2D"]
 collision_layer = 32
 collision_mask = 0
+script = ExtResource("1_ixufm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5d5br")
+
+[node name="MountedObject" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -10)
+collide_with_bodies = false
