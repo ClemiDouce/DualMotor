@@ -10,13 +10,17 @@
 		{
 			"uuid": "b4473e5e-c3fb-4031-a576-0410e5ac43d2",
 			"title": "Todo",
-			"tasks": []
+			"tasks": [
+				"948e1c66-cc00-4fa1-be36-04fbcead539d",
+				"f4c24ac4-1d00-4559-8c69-b37fe7578a8c",
+				"b3a0f9a3-2853-43d7-bd05-142f91e5f21b"
+			]
 		},
 		{
 			"uuid": "1ce4213e-6412-490c-ae2b-be9991d2e3df",
 			"title": "Doing",
 			"tasks": [
-				"4c81ad73-374d-4d41-a694-3f76953a3c77"
+				"c6b193b7-747b-4208-92c4-983d0e3cbd87"
 			]
 		},
 		{
@@ -27,7 +31,8 @@
 				"0259e41d-93b1-476f-9df5-04a0c5ad73c5",
 				"8227eed7-549c-405c-addb-031c02da8863",
 				"9108f5b9-bae4-4ad1-99d6-68d3ed83afca",
-				"50f87544-ec04-48eb-b155-31552ba0e035"
+				"50f87544-ec04-48eb-b155-31552ba0e035",
+				"4c81ad73-374d-4d41-a694-3f76953a3c77"
 			]
 		}
 	],
@@ -89,6 +94,43 @@
 			"uuid": "4c81ad73-374d-4d41-a694-3f76953a3c77",
 			"title": "Remettre moteur a sa place quand livré",
 			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
+		},
+		{
+			"uuid": "948e1c66-cc00-4fa1-be36-04fbcead539d",
+			"title": "Juice moteur",
+			"description": "animer la sortie et l'entrée du moteur\n",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
+		},
+		{
+			"uuid": "f4c24ac4-1d00-4559-8c69-b37fe7578a8c",
+			"title": "Generation d'objet",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": [
+				{
+					"details": "Definir zone de spawn",
+					"done": false
+				},
+				{
+					"details": "Algo generation d'objet juste par rapport aux moteurs actuelles",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "b3a0f9a3-2853-43d7-bd05-142f91e5f21b",
+			"title": "Bombe lancé peut etre relancé sans relancer le compteur",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
+		},
+		{
+			"uuid": "c6b193b7-747b-4208-92c4-983d0e3cbd87",
+			"title": "Creer facon de montrer plan d'un moteur",
+			"description": "Une loupe accroché a une chaine qui affiche le moteur construit\n",
 			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
 			"steps": []
 		}

@@ -10,13 +10,13 @@ class_name Player
 var motor_part : Node2D = null
 var STRENGTH = 200
 var direction : Vector2 = Vector2.ZERO
+var contrainte : Vector2 = Vector2.ZERO
 
 var is_stunned = false
 var is_occupied: bool:
 	get:
 		return motor_part != null
-
-const SPEED = 75.0
+@export var SPEED : float = 75.0
 
 func _ready() -> void:
 	sprite.sprite_frames = load("res://src/Player/player_"+ str(player_number+1) +"_spriteframe.tres")
@@ -40,6 +40,8 @@ func _physics_process(_delta):
 			motor_part.global_position = motor_part_marker.global_position
 	else:
 		self.velocity = self.velocity.move_toward(Vector2.ZERO, 1)
+	
+	velocity += contrainte
 	move_and_slide()
 
 func _process(_delta: float) -> void:
@@ -55,8 +57,8 @@ func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 
 
 func get_near_motorpart() -> MotorPart:
 	var close_elements = grab_area.get_overlapping_bodies()
-	
-	# Get closest
+	print(close_elements)
+	# Get closest²
 	if close_elements.size() > 0:
 		# Stocker le premier element recupéré
 		var temp_nearest : Node2D = null
@@ -106,6 +108,10 @@ func grab_motor_part():
 	if motor_part == null: # Si pas d'objet dans les mains
 		var near_motor_part = get_near_motorpart()
 		if near_motor_part:
+			if near_motor_part is Loupe:
+				print("Tu sais pas ce que tu loupe")
+				(near_motor_part as Loupe).take(self)
+			
 			self.motor_part = near_motor_part
 	else: # Si objet déja dans les mains
 		if motor_part is MotorPart:
@@ -122,5 +128,7 @@ func grab_motor_part():
 		elif motor_part is Motor:
 			self.motor_part.global_position = $ThrowMarker.global_position
 			(motor_part as Motor).detect_drop_zone()
-		
+		elif motor_part is Loupe:
+			contrainte = Vector2.ZERO
+			(motor_part as Loupe).release()
 		self.motor_part = null

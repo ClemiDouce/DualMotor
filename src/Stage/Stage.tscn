@@ -11,10 +11,10 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qju13"]
-size = Vector2(10, 379)
+size = Vector2(9, 283)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2wij"]
-size = Vector2(538, 9)
+size = Vector2(483, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fe1od"]
 size = Vector2(73, 38)
@@ -32,38 +32,41 @@ width = 2.0
 width_curve = SubResource("Curve_2rxnb")
 
 [node name="Player" parent="." instance=ExtResource("1_schre")]
+y_sort_enabled = true
 position = Vector2(118, 68)
 player_number = 0
+SPEED = 120.0
 
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(-5, 188)
+position = Vector2(5, 144)
 shape = SubResource("RectangleShape2D_qju13")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
 position = Vector2(528, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
-position = Vector2(-5, 188)
+position = Vector2(-51.5, 143.5)
 shape = SubResource("RectangleShape2D_qju13")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
-position = Vector2(259, -5.5)
+position = Vector2(242.5, 4)
 shape = SubResource("RectangleShape2D_k2wij")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
 position = Vector2(0, 387)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
-position = Vector2(259, -5.5)
+position = Vector2(241, -106)
 shape = SubResource("RectangleShape2D_k2wij")
 
 [node name="Zones" type="Node2D" parent="."]
+position = Vector2(97, 39)
 
 [node name="DropZone" type="Area2D" parent="Zones"]
 position = Vector2(190, 185)
