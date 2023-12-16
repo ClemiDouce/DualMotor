@@ -10,6 +10,9 @@ size = Vector2(34, 35)
 [node name="Socle" type="Node2D"]
 script = ExtResource("1_j4vti")
 
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+
 [node name="Loupe" type="CharacterBody2D" parent="."]
 collision_layer = 256
 collision_mask = 0
@@ -22,14 +25,6 @@ texture = ExtResource("2_1pc7a")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Loupe"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_ihy4j")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-collide_with_bodies = false
-
-[node name="Force" type="RayCast2D" parent="."]
-modulate = Color(0.823529, 0.0666667, 0.317647, 1)
-collision_mask = 0
-collide_with_bodies = false
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

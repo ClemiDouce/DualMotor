@@ -9,3 +9,6 @@ var clean_motor := {
 	"left": null,
 	"right": null
 }
+
+func remap_range(value, InputA, InputB, OutputA, OutputB):
+	return(value - InputA) / (InputB - InputA) * (OutputB - OutputA) + OutputA
