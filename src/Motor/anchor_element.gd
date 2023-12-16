@@ -32,3 +32,13 @@ func get_part():
 		return null
 	
 	return part_mounted
+
+func get_part_node() -> Node:
+	if not is_occupied:
+		return
+		
+	return mounted_object.get_children()[0]
+	
+func reset():
+	part_mounted = ""
+	get_part_node().queue_free()

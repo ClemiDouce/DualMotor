@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cb38xyy565yi0"]
+[gd_scene load_steps=12 format=3 uid="uid://cb38xyy565yi0"]
 
 [ext_resource type="Texture2D" uid="uid://bklw20p1rraop" path="res://assets/motor_base.png" id="1_8nx4d"]
 [ext_resource type="Script" path="res://src/Motor/motor.gd" id="1_mhqng"]
 [ext_resource type="PackedScene" uid="uid://cbgmgw7oy8qic" path="res://src/Motor/anchor_element.tscn" id="2_gh1e1"]
+[ext_resource type="Texture2D" uid="uid://b0ige2do2j8u5" path="res://assets/ui/error_cross.png" id="4_mi8pc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_220f4"]
 size = Vector2(24, 14)
@@ -18,7 +19,7 @@ colors = PackedColorArray(0.26804, 0.898039, 0.220248, 1, 1, 0.073366, 0.0136428
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_emcgl"]
 gradient = SubResource("Gradient_r5nvt")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tim46"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f86hn"]
 particle_flag_disable_z = true
 angle_min = -240.0
 angle_max = 240.0
@@ -36,6 +37,30 @@ scale_max = 2.5
 color_ramp = SubResource("GradientTexture1D_emcgl")
 hue_variation_min = -0.99
 hue_variation_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8oi16"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tim46"]
+particle_flag_disable_z = true
+angle_min = -240.0
+angle_max = 240.0
+direction = Vector3(0, -1, 0)
+spread = 20.0
+flatness = 0.04
+initial_velocity_min = 80.0
+initial_velocity_max = 120.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+gravity = Vector3(0, 200, 0)
+linear_accel_min = -20.84
+linear_accel_max = 12.5
+scale_min = 0.1
+scale_max = 0.3
+anim_offset_max = 1.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 64
@@ -79,8 +104,19 @@ shape = SubResource("RectangleShape2D_cutiv")
 position = Vector2(0, -7)
 emitting = false
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_tim46")
+process_material = SubResource("ParticleProcessMaterial_f86hn")
 lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.51
+
+[node name="CrossGenerator" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_8oi16")
+position = Vector2(0, -7)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_tim46")
+texture = ExtResource("4_mi8pc")
 one_shot = true
 explosiveness = 1.0
 randomness = 0.51

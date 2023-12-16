@@ -15,8 +15,15 @@ run/main_scene="res://src/Stage/Stage.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://src/Singleton/Global.gd"
+
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 window/stretch/scale=3.0
 
 [editor_plugins]

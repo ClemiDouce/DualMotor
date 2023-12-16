@@ -7,7 +7,10 @@ class_name Motor
 @onready var anchor_right:= $AnchorRight as MotorEmplacement
 @onready var anchor_down:= $AnchorDown as MotorEmplacement
 @onready var drop_zone_detector: Area2D = $DetectDropZone
-@onready var confetti: GPUParticles2D = $ConfettiGenerator
+@onready var confetti_generator: GPUParticles2D = $ConfettiGenerator
+@onready var cross_generator :GPUParticles2D= $CrossGenerator
+
+@export var point_depart: Marker2D
 
 
 
@@ -31,13 +34,7 @@ var parts := {
 }
 
 func _ready():
-	motor_bp = {
-		"top1": "KEY",
-		"top2": "SPIKE",
-		"down": "CACTUS",
-		"left": "PISTON",
-		"right": "PANNEL"
-	}
+	motor_bp = generate_random_motor()
 
 func check_parts():
 	parts["top1"] = anchor_top_1.get_part()
@@ -52,10 +49,33 @@ func detect_drop_zone():
 		var zone : Area2D = temp[0]
 		if zone.name == "DropZone":
 			if is_correct:
-				confetti.emitting = true
-				await get_tree().create_timer(2).timeout
-				queue_free()
+				confetti_generator.emitting = true
+				
 			else:
-				print("NAY")
+				cross_generator.emitting = true
+				
+			await get_tree().create_timer(2).timeout
+			reset_motor()
 		elif zone.name == "TrashZone":
 			print("Highway to the Trash Zone")
+
+func generate_random_motor():
+	var list_part : Array = Global.part_list
+	list_part.shuffle()
+	var new_bp = {
+		"top1": list_part[0],
+		"top2": list_part[1],
+		"down": list_part[2],
+		"left": list_part[3],
+		"right": list_part[4]
+	}
+	return new_bp
+
+func reset_motor():
+	motor_bp = generate_random_motor()
+	parts = Global.clean_motor.duplicate()
+	for el in get_children():
+		if el is MotorEmplacement:
+			el.reset()
+	await get_tree().create_timer(0.5).timeout
+	global_position = point_depart.global_position
