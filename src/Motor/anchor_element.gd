@@ -13,7 +13,7 @@ var is_occupied :bool:
 	get:
 		return mounted_object.get_child_count() > 0
 
-func mount(player:Player, node: MotorPart):
+func mount(node: MotorPart):
 	part_mounted = node.object_type
 	node.reparent(mounted_object, false)
 	node.transform = Transform2D(mounted_object.rotation, Vector2.ZERO)
@@ -48,10 +48,10 @@ func reset():
 func set_part_hint(part_name: String):
 	part_hint.texture = load("res://assets/object/"+part_name.to_lower()+".png")
 
-func _on_show_area_area_entered(area: Area2D) -> void:
+func _on_show_area_area_entered(_area: Area2D) -> void:
 	if not is_occupied:
 		part_hint.visible = true
 
 
-func _on_show_area_area_exited(area: Area2D) -> void:
+func _on_show_area_area_exited(_area: Area2D) -> void:
 	part_hint.visible = false

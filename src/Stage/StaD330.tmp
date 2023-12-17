@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cv7uducuauva6"]
+[gd_scene load_steps=10 format=3 uid="uid://cv7uducuauva6"]
 
 [ext_resource type="Script" path="res://src/Stage/Stage.gd" id="1_s5e0i"]
 [ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="1_schre"]
+[ext_resource type="PackedScene" uid="uid://c61yxsimw7ne2" path="res://src/MotorPart/motorpart.tscn" id="2_rp0cr"]
 [ext_resource type="PackedScene" uid="uid://cb38xyy565yi0" path="res://src/Motor/motor.tscn" id="3_i11p8"]
 [ext_resource type="PackedScene" uid="uid://db5nv4hhes7d0" path="res://src/MotorPartSpawner/motor_part_spawner.tscn" id="4_y2801"]
 
@@ -24,19 +25,18 @@ script = ExtResource("1_s5e0i")
 
 [node name="Motor" parent="." node_paths=PackedStringArray("point_depart") instance=ExtResource("3_i11p8")]
 position = Vector2(256, 74)
-point_depart = NodePath("../MotorEmplacement/PointDepartMotor1")
+point_depart = NodePath("../Node2D/PointDepartMotor1")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
 width_curve = SubResource("Curve_2rxnb")
 
-[node name="Player" parent="." node_paths=PackedStringArray("motor") instance=ExtResource("1_schre")]
+[node name="Player" parent="." instance=ExtResource("1_schre")]
 y_sort_enabled = true
 position = Vector2(118, 68)
 player_number = 0
 SPEED = 120.0
-motor = NodePath("../Motor")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -87,11 +87,35 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_fe1od")
 debug_color = Color(0.701961, 0.211765, 0.286275, 0.419608)
 
-[node name="MotorEmplacement" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="PointDepartMotor1" type="Marker2D" parent="MotorEmplacement"]
+[node name="PointDepartMotor1" type="Marker2D" parent="Node2D"]
 position = Vector2(257, 76)
 
-[node name="PointDeparMotor2" type="Marker2D" parent="MotorEmplacement"]
+[node name="PointDeparMotor2" type="Marker2D" parent="Node2D"]
 
 [node name="MotorPartSpawner" parent="." instance=ExtResource("4_y2801")]
+
+[node name="Object" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(27, 32)
+
+[node name="Object2" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(80, 61)
+
+[node name="Object3" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(26, 103)
+
+[node name="Object4" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(153, 121)
+
+[node name="Object5" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(170, 33)
+
+[node name="Object6" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(87, 22)
+
+[node name="Object7" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(169, 77)
+
+[node name="Object8" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(77, 107)

@@ -7,6 +7,7 @@ class_name Player
 @onready var detect_area: Area2D = $DetectArea
 
 @export_enum("P1", "P2") var player_number : int
+@export var SPEED : float = 75.0
 @export var motor : Motor
 
 var motor_part : Node2D = null
@@ -18,7 +19,6 @@ var is_stunned = false
 var is_occupied: bool:
 	get:
 		return motor_part != null
-@export var SPEED : float = 75.0
 
 func _ready() -> void:
 	sprite.sprite_frames = load("res://src/Player/player_"+ str(player_number+1) +"_spriteframe.tres")
@@ -121,7 +121,7 @@ func grab_motor_part():
 		if motor_part is MotorPart:
 			var nearest : MotorEmplacement = get_near_emplacement()
 			if nearest != null:
-				nearest.mount(self, self.motor_part)
+				nearest.mount(self.motor_part)
 			elif direction != Vector2.ZERO:
 				self.motor_part.global_position = $ThrowMarker.global_position + (direction * 4)
 				self.motor_part.throw(direction * STRENGTH)

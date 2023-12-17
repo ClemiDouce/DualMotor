@@ -23,8 +23,8 @@ func _draw() -> void:
 
 func get_random_point() -> Vector2:
 	var random_point = Vector2(
-		randi_range(position.x, position.x+spawn_zone.size.x),
-		randi_range(position.y, position.y+spawn_zone.size.y),
+		randf_range(position.x, position.x+spawn_zone.size.x),
+		randf_range(position.y, position.y+spawn_zone.size.y),
 	)
 	return random_point
 
