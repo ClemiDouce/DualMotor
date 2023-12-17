@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cv7uducuauva6"]
+[gd_scene load_steps=10 format=3 uid="uid://cv7uducuauva6"]
 
 [ext_resource type="Script" path="res://src/Stage/Stage.gd" id="1_s5e0i"]
 [ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="1_schre"]
 [ext_resource type="PackedScene" uid="uid://c61yxsimw7ne2" path="res://src/Object/object.tscn" id="2_rp0cr"]
 [ext_resource type="PackedScene" uid="uid://cb38xyy565yi0" path="res://src/Motor/motor.tscn" id="3_i11p8"]
+[ext_resource type="PackedScene" uid="uid://db5nv4hhes7d0" path="res://src/MotorPartSpawner/motor_part_spawner.tscn" id="4_y2801"]
 
 [sub_resource type="Curve" id="Curve_2rxnb"]
 bake_resolution = 1000
@@ -86,42 +87,42 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_fe1od")
 debug_color = Color(0.701961, 0.211765, 0.286275, 0.419608)
 
-[node name="Objects" type="Node2D" parent="."]
-
-[node name="Object" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(27, 32)
-
-[node name="Object2" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(80, 61)
-object_type = "CACTUS"
-
-[node name="Object3" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(26, 103)
-object_type = "MUSHROOM"
-
-[node name="Object4" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(153, 121)
-object_type = "SPIKE"
-
-[node name="Object5" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(170, 33)
-object_type = "PISTON"
-
-[node name="Object6" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(87, 22)
-object_type = "MUSHROOM"
-
-[node name="Object7" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(169, 77)
-object_type = "PANNEL"
-
-[node name="Object8" parent="Objects" instance=ExtResource("2_rp0cr")]
-position = Vector2(77, 107)
-object_type = "KEY"
-
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="PointDepartMotor1" type="Marker2D" parent="Node2D"]
 position = Vector2(257, 76)
 
 [node name="PointDeparMotor2" type="Marker2D" parent="Node2D"]
+
+[node name="MotorPartSpawner" parent="." instance=ExtResource("4_y2801")]
+
+[node name="Object" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(27, 32)
+
+[node name="Object2" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(80, 61)
+object_type = "CACTUS"
+
+[node name="Object3" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(26, 103)
+object_type = "MUSHROOM"
+
+[node name="Object4" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(153, 121)
+object_type = "SPIKE"
+
+[node name="Object5" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(170, 33)
+object_type = "PISTON"
+
+[node name="Object6" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(87, 22)
+object_type = "MUSHROOM"
+
+[node name="Object7" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(169, 77)
+object_type = "PANNEL"
+
+[node name="Object8" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
+position = Vector2(77, 107)
+object_type = "KEY"

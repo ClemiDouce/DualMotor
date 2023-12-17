@@ -1,7 +1,7 @@
 extends Node
 
-var part_list = ["FLAG", "CACTUS", "PISTON", "SPIKE", "KEY", "PANNEL", "LEVER", "MUSHROOM", "BOMB"]
-
+var part_list = ["FLAG", "CACTUS", "PISTON", "SPIKE", "KEY", "PANNEL", "LEVER", "MUSHROOM"]
+	
 var clean_motor := {
 	"top1": null,
 	"top2": null,

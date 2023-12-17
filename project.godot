@@ -13,6 +13,7 @@ config_version=5
 config/name="MotorCraftDuel"
 run/main_scene="res://src/Stage/Stage.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -26,6 +27,7 @@ window/size/viewport_height=280
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/stretch/scale=2.0
 
 [editor_plugins]
 

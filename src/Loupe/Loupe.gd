@@ -2,9 +2,9 @@ extends Node2D
 class_name SocleLoupe
 
 @onready var loupe: CharacterBody2D = $Loupe
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var spring_timer: Timer = $Timer
 @onready var elastic: Line2D = $Line2D
+@onready var boing_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 var is_taken: bool:
@@ -22,6 +22,7 @@ func take(new_owner: Player):
 	player = new_owner
 	
 func release():
+	boing_player.play()
 	player = null
 	var tweener = create_tween().tween_property(loupe, "position", Vector2.ZERO, 0.8)
 	tweener.set_ease(Tween.EASE_OUT)

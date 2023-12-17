@@ -7,12 +7,14 @@ class_name Player
 @onready var detect_area: Area2D = $DetectArea
 
 @export_enum("P1", "P2") var player_number : int
+@export var motor : Motor
+
 var motor_part : Node2D = null
 var STRENGTH = 200
 var direction : Vector2 = Vector2.ZERO
 var contrainte : Vector2 = Vector2.ZERO
-
 var is_stunned = false
+
 var is_occupied: bool:
 	get:
 		return motor_part != null
@@ -57,7 +59,6 @@ func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 
 
 func get_near_motorpart() -> MotorPart:
 	var close_elements = grab_area.get_overlapping_bodies()
-	print(close_elements)
 	# Get closest²
 	if close_elements.size() > 0:
 		# Stocker le premier element recupéré
@@ -66,7 +67,11 @@ func get_near_motorpart() -> MotorPart:
 		var distance_nearest : float = 10000
 		# Pour chaque élément dans les elements proches
 		for el in close_elements:
-			if (el is MotorPart and el.is_mounted) or (el is Motor and not (el as Motor).is_complete) or el is MotorEmplacement:
+			if (
+				el is MotorPart and el.is_mounted) or \
+				(el is Motor and not (el as Motor).is_complete) or \
+				el is MotorEmplacement or \
+				(el is Motor and el != motor):
 				continue
 			# distance entre le joueur et 'el'
 			var temp_distance = self.position.distance_to(el.global_position)
@@ -109,14 +114,12 @@ func grab_motor_part():
 		var near_motor_part = get_near_motorpart()
 		if near_motor_part:
 			if near_motor_part is Loupe:
-				print("Tu sais pas ce que tu loupe")
 				(near_motor_part as Loupe).take(self)
 			
 			self.motor_part = near_motor_part
 	else: # Si objet déja dans les mains
 		if motor_part is MotorPart:
 			var nearest : MotorEmplacement = get_near_emplacement()
-			print(nearest)
 			if nearest != null:
 				nearest.mount(self, self.motor_part)
 			elif direction != Vector2.ZERO:

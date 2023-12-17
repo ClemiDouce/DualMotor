@@ -16,10 +16,8 @@ func reset_line():
 func draw_item_line():
 	# Get nearest emplacement of the player
 	if player.is_occupied:
-		#print("Est occupée")
 		nearest_element = player.get_near_emplacement()
 	else:
-		#print("N'est pas occupé")
 		nearest_element = player.get_near_motorpart()
 	
 	# Si y a un element proche

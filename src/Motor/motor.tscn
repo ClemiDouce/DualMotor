@@ -62,9 +62,10 @@ scale_min = 0.1
 scale_max = 0.3
 anim_offset_max = 1.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Motor" type="CharacterBody2D"]
 collision_layer = 64
 collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_mhqng")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

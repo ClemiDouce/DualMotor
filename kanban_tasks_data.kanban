@@ -11,16 +11,15 @@
 			"uuid": "b4473e5e-c3fb-4031-a576-0410e5ac43d2",
 			"title": "Todo",
 			"tasks": [
-				"948e1c66-cc00-4fa1-be36-04fbcead539d",
-				"f4c24ac4-1d00-4559-8c69-b37fe7578a8c",
-				"b3a0f9a3-2853-43d7-bd05-142f91e5f21b"
+				"b3a0f9a3-2853-43d7-bd05-142f91e5f21b",
+				"948e1c66-cc00-4fa1-be36-04fbcead539d"
 			]
 		},
 		{
 			"uuid": "1ce4213e-6412-490c-ae2b-be9991d2e3df",
 			"title": "Doing",
 			"tasks": [
-				"c6b193b7-747b-4208-92c4-983d0e3cbd87"
+				"f4c24ac4-1d00-4559-8c69-b37fe7578a8c"
 			]
 		},
 		{
@@ -32,7 +31,8 @@
 				"8227eed7-549c-405c-addb-031c02da8863",
 				"9108f5b9-bae4-4ad1-99d6-68d3ed83afca",
 				"50f87544-ec04-48eb-b155-31552ba0e035",
-				"4c81ad73-374d-4d41-a694-3f76953a3c77"
+				"4c81ad73-374d-4d41-a694-3f76953a3c77",
+				"c6b193b7-747b-4208-92c4-983d0e3cbd87"
 			]
 		}
 	],
@@ -132,7 +132,20 @@
 			"title": "Creer facon de montrer plan d'un moteur",
 			"description": "Une loupe accroché a une chaine qui affiche le moteur construit\n",
 			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
-			"steps": []
+			"steps": [
+				{
+					"details": "Creer loupe",
+					"done": true
+				},
+				{
+					"details": "Chaine de loupe",
+					"done": true
+				},
+				{
+					"details": "Voir element quand proche d'un moteur",
+					"done": true
+				}
+			]
 		}
 	],
 	"layout": {

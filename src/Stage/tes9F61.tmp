@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://co63f45tq8uru"]
+[gd_scene load_steps=3 format=3 uid="uid://co63f45tq8uru"]
 
 [ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="1_cf351"]
 [ext_resource type="PackedScene" uid="uid://b4cddx6q6lunt" path="res://src/Loupe/Loupe.tscn" id="2_fscp7"]
-[ext_resource type="PackedScene" uid="uid://cb38xyy565yi0" path="res://src/Motor/motor.tscn" id="3_rihbe"]
 
 [node name="TestLoupe" type="Node2D"]
 position = Vector2(0, -1)
@@ -13,6 +12,3 @@ SPEED = 120.0
 
 [node name="Socle" parent="." instance=ExtResource("2_fscp7")]
 position = Vector2(73, 71)
-
-[node name="Motor" parent="." instance=ExtResource("3_rihbe")]
-position = Vector2(135, 91)

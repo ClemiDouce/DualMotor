@@ -34,7 +34,7 @@ var parts := {
 }
 
 func _ready():
-	motor_bp = generate_random_motor()
+	reset_motor()
 
 func check_parts():
 	parts["top1"] = anchor_top_1.get_part()
@@ -77,5 +77,11 @@ func reset_motor():
 	for el in get_children():
 		if el is MotorEmplacement:
 			el.reset()
+	anchor_down.set_part_hint(motor_bp["down"])
+	anchor_left.set_part_hint(motor_bp["left"])
+	anchor_right.set_part_hint(motor_bp["right"])
+	anchor_top_1.set_part_hint(motor_bp["top1"])
+	anchor_top_2.set_part_hint(motor_bp["top2"])
 	await get_tree().create_timer(0.5).timeout
-	global_position = point_depart.global_position
+	if point_depart:
+		global_position = point_depart.global_position

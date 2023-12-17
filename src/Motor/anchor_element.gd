@@ -6,6 +6,7 @@ signal has_something
 var part_mounted : String = ""
 
 @onready var mounted_object: Node2D = $MountedObject
+@onready var part_hint: Sprite2D = $PartHint
 
 # Si un objet est actuellement monté
 var is_occupied :bool:
@@ -41,4 +42,15 @@ func get_part_node() -> Node:
 	
 func reset():
 	part_mounted = ""
-	get_part_node().queue_free()
+	if is_occupied:
+		get_part_node().queue_free()
+
+func set_part_hint(part_name: String):
+	part_hint.texture = load("res://assets/object/"+part_name.to_lower()+".png")
+
+func _on_show_area_area_entered(area: Area2D) -> void:
+	part_hint.visible = true
+
+
+func _on_show_area_area_exited(area: Area2D) -> void:
+	part_hint.visible = false
