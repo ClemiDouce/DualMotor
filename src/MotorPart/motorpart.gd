@@ -1,25 +1,31 @@
 extends CharacterBody2D
 class_name MotorPart
 
+signal mounted
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var delay_label: AnimatedSprite2D = $DelayLabel
 
-var object_type: String = ""
+var part_type: String = ""
 
 var FRICTION = 250
 
-var falling = true
-var is_mounted = false
 var throwed = false
+var falling = true
+var is_mounted = false:
+	set(new_value):
+		is_mounted = new_value
+		mounted.emit()
+		
 
 var can_pick: bool:
 	get:
 		return !is_mounted and !falling and !throwed
 
-func create(part_type: String, _position: Vector2):
+func create(_part_type: String, _position: Vector2):
 	global_position = _position
-	object_type = part_type
-	var texture_path = "res://assets/object/" + object_type.to_lower() + ".png"
+	part_type = _part_type
+	var texture_path = "res://assets/object/" + part_type.to_lower() + ".png"
 	self.sprite.texture = load(texture_path)
 	var fall_d = randf_range(1.1, 2.5)
 	fall(fall_d)
@@ -37,8 +43,6 @@ func _process(delta: float) -> void:
 	if velocity == Vector2.ZERO:
 		if throwed == true:
 			throwed = false
-			if object_type == "BOMB":
-				start_timer()
 	
 	move_and_slide()
 	
@@ -48,20 +52,14 @@ func throw(new_velocity: Vector2):
 	self.velocity = new_velocity
 	throwed = true
 
-func start_timer():
-	delay_label.visible = true
-	delay_label.play("decompte")
-
-func bomb_explode():
-	var to_bomb : Array[Node2D] = $ExplodeArea.get_overlapping_bodies()
-	if to_bomb:
-		for bombed in to_bomb:
-			bombed.get_bombed(self.position)
-	queue_free()
-
-
-func _on_delay_label_animation_finished() -> void:
-	delay_label.visible = false
-	bomb_explode()
+#func _on_delay_label_animation_finished() -> void:
+	#delay_label.visible = false
+	#bomb_explode()
 	
 
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	if !falling:
+		mounted.emit()
+		queue_free()

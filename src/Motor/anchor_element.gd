@@ -14,7 +14,7 @@ var is_occupied :bool:
 		return mounted_object.get_child_count() > 0
 
 func mount(node: MotorPart):
-	part_mounted = node.object_type
+	part_mounted = node.part_type
 	node.reparent(mounted_object, false)
 	node.transform = Transform2D(mounted_object.rotation, Vector2.ZERO)
 	node.is_mounted = true

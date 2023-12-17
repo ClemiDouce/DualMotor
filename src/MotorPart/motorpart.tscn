@@ -72,5 +72,10 @@ visible = false
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_ucuqt")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(0.3, 0.35)
+
 [connection signal="animation_finished" from="DelayLabel" to="." method="_on_delay_label_animation_finished"]
 [connection signal="frame_changed" from="DelayLabel" to="." method="_on_delay_label_frame_changed"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

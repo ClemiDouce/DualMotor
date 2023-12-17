@@ -3,21 +3,25 @@ extends Node2D
 
 var Part = preload("res://src/MotorPart/motorpart.tscn")
 
+
+@export var MAX_PART_ON_SCREEN: int = 10
 @onready var part_list: Node = $PartList
+var part_count: int:
+	get:
+		return part_list.get_children().size()
 
-
-var spawn_zone : Rect2:
+@export var spawn_zone : Rect2:
 	set(new_value):
 		spawn_zone = new_value
 		queue_redraw()
 
-func _ready() -> void:
-	var window_width = ProjectSettings.get_setting("display/window/size/viewport_width")
-	var window_height = ProjectSettings.get_setting("display/window/size/viewport_height")
-	spawn_zone = Rect2(
-		position+Vector2(3,3),
-		Vector2(window_width, window_height)-Vector2(10,10)
-	)
+#func _ready() -> void:
+	#var window_width = ProjectSettings.get_setting("display/window/size/viewport_width")
+	#var window_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+	#spawn_zone = Rect2(
+		#position,
+		#Vector2(window_width, window_height)
+	#)
 
 func _draw() -> void:
 	if Engine.is_editor_hint():
@@ -25,8 +29,8 @@ func _draw() -> void:
 
 func get_random_point() -> Vector2:
 	var random_point = Vector2(
-		randf_range(position.x, position.x+spawn_zone.size.x),
-		randf_range(position.y, position.y+spawn_zone.size.y),
+		randf_range(spawn_zone.position.x, spawn_zone.end.x),
+		randf_range(spawn_zone.position.y, spawn_zone.end.y)
 	)
 	return random_point
 
@@ -35,8 +39,11 @@ func create_random_part():
 	var type = Global.part_list.pick_random()
 	part_list.add_child(instance)
 	instance.create(type, get_random_point())
+	instance.mounted.connect(_on_spawn_timer_timeout)
 
 func _on_spawn_timer_timeout() -> void:
-	create_random_part()
+	if not part_count >= MAX_PART_ON_SCREEN:
+		create_random_part()
+		$SpawnTimer.start()
 	
 	

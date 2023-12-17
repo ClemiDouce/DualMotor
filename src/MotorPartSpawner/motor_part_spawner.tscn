@@ -4,8 +4,12 @@
 
 [node name="MotorPartSpawner" type="Node2D"]
 script = ExtResource("1_pqtdl")
+MAX_PART_ON_SCREEN = null
+spawn_zone = Rect2(3, 3, 370, 210)
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 autostart = true
 
 [node name="PartList" type="Node" parent="."]

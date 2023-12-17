@@ -110,3 +110,5 @@ position = Vector2(266, 80)
 position = Vector2(190, 68)
 
 [node name="MotorPartSpawner" parent="." instance=ExtResource("4_y2801")]
+MAX_PART_ON_SCREEN = 10
+spawn_zone = Rect2(20, 20, 340, 180)
