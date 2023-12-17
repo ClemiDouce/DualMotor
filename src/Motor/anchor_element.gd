@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 class_name MotorEmplacement
 
 signal has_something
@@ -49,7 +49,8 @@ func set_part_hint(part_name: String):
 	part_hint.texture = load("res://assets/object/"+part_name.to_lower()+".png")
 
 func _on_show_area_area_entered(area: Area2D) -> void:
-	part_hint.visible = true
+	if not is_occupied:
+		part_hint.visible = true
 
 
 func _on_show_area_area_exited(area: Area2D) -> void:

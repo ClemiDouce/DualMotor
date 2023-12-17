@@ -4,6 +4,8 @@ class_name MotorPart
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var delay_label: AnimatedSprite2D = $DelayLabel
 
+var object_type: String = ""
+
 var FRICTION = 250
 
 var falling = true

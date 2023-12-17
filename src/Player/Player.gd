@@ -86,7 +86,7 @@ func get_near_motorpart() -> MotorPart:
 
 func get_near_emplacement() -> MotorEmplacement:
 	
-	var close_elements = detect_area.get_overlapping_bodies()
+	var close_elements = detect_area.get_overlapping_areas()
 	
 	# Get closest
 	if close_elements.size() > 0:

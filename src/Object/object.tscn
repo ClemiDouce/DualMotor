@@ -44,7 +44,6 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_aollq")
-object_type = "BOMB"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -7)

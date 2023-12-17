@@ -101,28 +101,21 @@ position = Vector2(27, 32)
 
 [node name="Object2" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(80, 61)
-object_type = "CACTUS"
 
 [node name="Object3" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(26, 103)
-object_type = "MUSHROOM"
 
 [node name="Object4" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(153, 121)
-object_type = "SPIKE"
 
 [node name="Object5" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(170, 33)
-object_type = "PISTON"
 
 [node name="Object6" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(87, 22)
-object_type = "MUSHROOM"
 
 [node name="Object7" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(169, 77)
-object_type = "PANNEL"
 
 [node name="Object8" parent="MotorPartSpawner" instance=ExtResource("2_rp0cr")]
 position = Vector2(77, 107)
-object_type = "KEY"
