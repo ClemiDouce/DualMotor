@@ -59,6 +59,7 @@ func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 
 
 func get_near_motorpart() -> MotorPart:
 	var close_elements = grab_area.get_overlapping_bodies()
+	close_elements.append_array(grab_area.get_overlapping_areas())
 	# Get closest²
 	if close_elements.size() > 0:
 		# Stocker le premier element recupéré
@@ -67,19 +68,14 @@ func get_near_motorpart() -> MotorPart:
 		var distance_nearest : float = 10000
 		# Pour chaque élément dans les elements proches
 		for el in close_elements:
-			if (
-				el is MotorPart and el.is_mounted) or \
-				(el is Motor and not (el as Motor).is_complete) or \
-				el is MotorEmplacement or \
-				(el is Motor and el != motor):
-				continue
+			if (el is Motor and el.can_pick(self)) or (el is MotorPart and el.can_pick) or el is Loupe:
 			# distance entre le joueur et 'el'
-			var temp_distance = self.position.distance_to(el.global_position)
+				var temp_distance = self.position.distance_to(el.global_position)
 			# Si la distance temporaire est inferieur a celle de l'element actuelle
 			# et que c'est pas le meme element 
-			if temp_distance < distance_nearest:
-				temp_nearest = el
-				distance_nearest = temp_distance
+				if temp_distance < distance_nearest:
+					temp_nearest = el
+					distance_nearest = temp_distance
 		return temp_nearest
 	else:
 		return null

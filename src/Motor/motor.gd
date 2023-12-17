@@ -84,3 +84,6 @@ func reset_motor():
 	await get_tree().create_timer(0.5).timeout
 	if point_depart:
 		global_position = point_depart.global_position
+
+func can_pick(player: Player):
+	return is_complete and player.motor == self

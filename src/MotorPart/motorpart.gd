@@ -12,7 +12,13 @@ var falling = true
 var is_mounted = false
 var throwed = false
 
-func _ready():
+var can_pick: bool:
+	get:
+		return !is_mounted and !falling and !throwed
+
+func create(part_type: String, _position: Vector2):
+	global_position = _position
+	object_type = part_type
 	var texture_path = "res://assets/object/" + object_type.to_lower() + ".png"
 	self.sprite.texture = load(texture_path)
 	var fall_d = randf_range(1.1, 2.5)

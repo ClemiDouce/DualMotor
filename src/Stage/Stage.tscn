@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cv7uducuauva6"]
+[gd_scene load_steps=11 format=3 uid="uid://cv7uducuauva6"]
 
 [ext_resource type="Script" path="res://src/Stage/Stage.gd" id="1_s5e0i"]
 [ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="1_schre"]
 [ext_resource type="PackedScene" uid="uid://cb38xyy565yi0" path="res://src/Motor/motor.tscn" id="3_i11p8"]
 [ext_resource type="PackedScene" uid="uid://db5nv4hhes7d0" path="res://src/MotorPartSpawner/motor_part_spawner.tscn" id="4_y2801"]
+[ext_resource type="PackedScene" uid="uid://b4cddx6q6lunt" path="res://src/Loupe/Loupe.tscn" id="5_gxl3p"]
 
 [sub_resource type="Curve" id="Curve_2rxnb"]
 bake_resolution = 1000
@@ -11,10 +12,13 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qju13"]
-size = Vector2(9, 283)
+size = Vector2(3, 223.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2wij"]
-size = Vector2(483, 9)
+size = Vector2(382.5, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_layel"]
+size = Vector2(411, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fe1od"]
 size = Vector2(73, 38)
@@ -22,8 +26,8 @@ size = Vector2(73, 38)
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_s5e0i")
 
-[node name="Motor" parent="." node_paths=PackedStringArray("point_depart") instance=ExtResource("3_i11p8")]
-position = Vector2(256, 74)
+[node name="MotorP1" parent="." node_paths=PackedStringArray("point_depart") instance=ExtResource("3_i11p8")]
+position = Vector2(266, 80)
 point_depart = NodePath("../MotorEmplacement/PointDepartMotor1")
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -33,44 +37,52 @@ width_curve = SubResource("Curve_2rxnb")
 
 [node name="Player" parent="." node_paths=PackedStringArray("motor") instance=ExtResource("1_schre")]
 y_sort_enabled = true
-position = Vector2(118, 68)
+position = Vector2(334, 61)
 player_number = 0
 SPEED = 120.0
-motor = NodePath("../Motor")
+motor = NodePath("../MotorP1")
 
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(5, 144)
+position = Vector2(0, 111)
 shape = SubResource("RectangleShape2D_qju13")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
 position = Vector2(528, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
-position = Vector2(-51.5, 143.5)
+position = Vector2(-148.25, 110.25)
 shape = SubResource("RectangleShape2D_qju13")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
+position = Vector2(-1, -5)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
-position = Vector2(242.5, 4)
+position = Vector2(190.75, 5)
 shape = SubResource("RectangleShape2D_k2wij")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, 387)
+position = Vector2(-10, 334)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
-position = Vector2(241, -106)
-shape = SubResource("RectangleShape2D_k2wij")
+position = Vector2(203, -114)
+shape = SubResource("RectangleShape2D_layel")
 
 [node name="Zones" type="Node2D" parent="."]
-position = Vector2(97, 39)
 
 [node name="DropZone" type="Area2D" parent="Zones"]
-position = Vector2(190, 185)
+position = Vector2(231, 185)
 collision_layer = 128
 collision_mask = 0
 
@@ -79,7 +91,7 @@ shape = SubResource("RectangleShape2D_fe1od")
 debug_color = Color(0.258824, 0.701961, 0.12549, 0.419608)
 
 [node name="TrashZone" type="Area2D" parent="Zones"]
-position = Vector2(86, 185)
+position = Vector2(151, 185)
 collision_layer = 128
 collision_mask = 0
 
@@ -90,8 +102,11 @@ debug_color = Color(0.701961, 0.211765, 0.286275, 0.419608)
 [node name="MotorEmplacement" type="Node2D" parent="."]
 
 [node name="PointDepartMotor1" type="Marker2D" parent="MotorEmplacement"]
-position = Vector2(257, 76)
+position = Vector2(266, 80)
 
 [node name="PointDeparMotor2" type="Marker2D" parent="MotorEmplacement"]
+
+[node name="SocleLoupe" parent="." instance=ExtResource("5_gxl3p")]
+position = Vector2(190, 68)
 
 [node name="MotorPartSpawner" parent="." instance=ExtResource("4_y2801")]
