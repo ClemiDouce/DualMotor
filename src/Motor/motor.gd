@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Area2D
 class_name Motor
 
 @onready var anchor_top_1:= $AnchorTop1 as MotorEmplacement
@@ -6,7 +6,6 @@ class_name Motor
 @onready var anchor_left:= $AnchorLeft as MotorEmplacement
 @onready var anchor_right:= $AnchorRight as MotorEmplacement
 @onready var anchor_down:= $AnchorDown as MotorEmplacement
-@onready var drop_zone_detector: Area2D = $DetectDropZone
 @onready var confetti_generator: GPUParticles2D = $ConfettiGenerator
 @onready var cross_generator :GPUParticles2D= $CrossGenerator
 
@@ -44,7 +43,7 @@ func check_parts():
 	parts["down"] = anchor_down.get_part()
 	
 func detect_drop_zone():
-	var temp : Array[Area2D] = drop_zone_detector.get_overlapping_areas()
+	var temp : Array[Area2D] = get_overlapping_areas()
 	if temp:
 		var zone : Area2D = temp[0]
 		if zone.name == "DropZone":
@@ -85,3 +84,6 @@ func reset_motor():
 	await get_tree().create_timer(0.5).timeout
 	if point_depart:
 		global_position = point_depart.global_position
+
+func can_pick(player: Player):
+	return is_complete and player.motor == self

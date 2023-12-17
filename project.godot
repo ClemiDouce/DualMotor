@@ -22,16 +22,15 @@ Global="*res://src/Singleton/Global.gd"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=280
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/viewport_width=380
+window/size/viewport_height=220
+window/size/window_width_override=1140
+window/size/window_height_override=660
 window/stretch/mode="canvas_items"
-window/stretch/scale=2.0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
+enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/notes_tab/plugin.cfg")
 
 [input]
 

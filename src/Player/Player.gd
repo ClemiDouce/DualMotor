@@ -7,6 +7,7 @@ class_name Player
 @onready var detect_area: Area2D = $DetectArea
 
 @export_enum("P1", "P2") var player_number : int
+@export var SPEED : float = 75.0
 @export var motor : Motor
 
 var motor_part : Node2D = null
@@ -18,7 +19,6 @@ var is_stunned = false
 var is_occupied: bool:
 	get:
 		return motor_part != null
-@export var SPEED : float = 75.0
 
 func _ready() -> void:
 	sprite.sprite_frames = load("res://src/Player/player_"+ str(player_number+1) +"_spriteframe.tres")
@@ -59,6 +59,7 @@ func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 
 
 func get_near_motorpart() -> MotorPart:
 	var close_elements = grab_area.get_overlapping_bodies()
+	close_elements.append_array(grab_area.get_overlapping_areas())
 	# Get closest²
 	if close_elements.size() > 0:
 		# Stocker le premier element recupéré
@@ -67,26 +68,21 @@ func get_near_motorpart() -> MotorPart:
 		var distance_nearest : float = 10000
 		# Pour chaque élément dans les elements proches
 		for el in close_elements:
-			if (
-				el is MotorPart and el.is_mounted) or \
-				(el is Motor and not (el as Motor).is_complete) or \
-				el is MotorEmplacement or \
-				(el is Motor and el != motor):
-				continue
+			if (el is Motor and el.can_pick(self)) or (el is MotorPart and el.can_pick) or el is Loupe:
 			# distance entre le joueur et 'el'
-			var temp_distance = self.position.distance_to(el.global_position)
+				var temp_distance = self.position.distance_to(el.global_position)
 			# Si la distance temporaire est inferieur a celle de l'element actuelle
 			# et que c'est pas le meme element 
-			if temp_distance < distance_nearest:
-				temp_nearest = el
-				distance_nearest = temp_distance
+				if temp_distance < distance_nearest:
+					temp_nearest = el
+					distance_nearest = temp_distance
 		return temp_nearest
 	else:
 		return null
 
 func get_near_emplacement() -> MotorEmplacement:
 	
-	var close_elements = detect_area.get_overlapping_bodies()
+	var close_elements = detect_area.get_overlapping_areas()
 	
 	# Get closest
 	if close_elements.size() > 0:
@@ -121,7 +117,7 @@ func grab_motor_part():
 		if motor_part is MotorPart:
 			var nearest : MotorEmplacement = get_near_emplacement()
 			if nearest != null:
-				nearest.mount(self, self.motor_part)
+				nearest.mount(self.motor_part)
 			elif direction != Vector2.ZERO:
 				self.motor_part.global_position = $ThrowMarker.global_position + (direction * 4)
 				self.motor_part.throw(direction * STRENGTH)

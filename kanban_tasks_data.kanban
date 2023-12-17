@@ -112,7 +112,7 @@
 			"steps": [
 				{
 					"details": "Definir zone de spawn",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Algo generation d'objet juste par rapport aux moteurs actuelles",

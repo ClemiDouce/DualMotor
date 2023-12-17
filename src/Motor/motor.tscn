@@ -1,15 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb38xyy565yi0"]
+[gd_scene load_steps=11 format=3 uid="uid://cb38xyy565yi0"]
 
 [ext_resource type="Texture2D" uid="uid://bklw20p1rraop" path="res://assets/motor_base.png" id="1_8nx4d"]
 [ext_resource type="Script" path="res://src/Motor/motor.gd" id="1_mhqng"]
 [ext_resource type="PackedScene" uid="uid://cbgmgw7oy8qic" path="res://src/Motor/anchor_element.tscn" id="2_gh1e1"]
 [ext_resource type="Texture2D" uid="uid://b0ige2do2j8u5" path="res://assets/ui/error_cross.png" id="4_mi8pc"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_220f4"]
-size = Vector2(24, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cutiv"]
-size = Vector2(1, 1)
 
 [sub_resource type="Gradient" id="Gradient_r5nvt"]
 interpolation_mode = 2
@@ -62,18 +56,17 @@ scale_min = 0.1
 scale_max = 0.3
 anim_offset_max = 1.0
 
-[node name="Motor" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cutiv"]
+size = Vector2(1, 1)
+
+[node name="Motor" type="Area2D"]
 collision_layer = 64
-collision_mask = 0
-motion_mode = 1
+collision_mask = 128
 script = ExtResource("1_mhqng")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.66667, 1)
 texture = ExtResource("1_8nx4d")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_220f4")
 
 [node name="AnchorTop1" parent="." instance=ExtResource("2_gh1e1")]
 position = Vector2(-8, -7)
@@ -87,19 +80,11 @@ rotation = 3.14159
 
 [node name="AnchorLeft" parent="." instance=ExtResource("2_gh1e1")]
 position = Vector2(-13, 0)
-rotation = 4.71238
+rotation = -1.57081
 
 [node name="AnchorRight" parent="." instance=ExtResource("2_gh1e1")]
 position = Vector2(13, 0)
 rotation = 1.5708
-
-[node name="DetectDropZone" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectDropZone"]
-shape = SubResource("RectangleShape2D_cutiv")
 
 [node name="ConfettiGenerator" type="GPUParticles2D" parent="."]
 position = Vector2(0, -7)
@@ -121,3 +106,6 @@ texture = ExtResource("4_mi8pc")
 one_shot = true
 explosiveness = 1.0
 randomness = 0.51
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cutiv")

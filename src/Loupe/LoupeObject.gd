@@ -12,6 +12,6 @@ func take(new_owner: Player):
 func release():
 	released.emit()
 
-func _process(delta: float):
+func _process(_delta: float):
 	velocity += contrainte
 	move_and_slide()

@@ -1,20 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbgmgw7oy8qic"]
+[gd_scene load_steps=3 format=3 uid="uid://cbgmgw7oy8qic"]
 
 [ext_resource type="Script" path="res://src/Motor/anchor_element.gd" id="1_ixufm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5d5br"]
-size = Vector2(4, 4)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_nmpmg"]
-radius = 7.07107
+radius = 7.0
 
-[node name="AnchorElement" type="StaticBody2D"]
+[node name="AnchorElement" type="Area2D"]
 collision_layer = 32
-collision_mask = 0
+collision_mask = 256
 script = ExtResource("1_ixufm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_5d5br")
+shape = SubResource("CircleShape2D_nmpmg")
+debug_color = Color(0.0784314, 0.623529, 0.513726, 0.419608)
 
 [node name="MountedObject" type="Node2D" parent="."]
 
@@ -22,18 +20,10 @@ shape = SubResource("RectangleShape2D_5d5br")
 target_position = Vector2(0, -10)
 collide_with_bodies = false
 
-[node name="ShowArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShowArea"]
-shape = SubResource("CircleShape2D_nmpmg")
-debug_color = Color(0.0784314, 0.623529, 0.513726, 0.419608)
-
 [node name="PartHint" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0.156863)
 offset = Vector2(0, -9)
 
-[connection signal="area_entered" from="ShowArea" to="." method="_on_show_area_area_entered"]
-[connection signal="area_exited" from="ShowArea" to="." method="_on_show_area_area_exited"]
+[connection signal="area_entered" from="." to="." method="_on_show_area_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_show_area_area_exited"]

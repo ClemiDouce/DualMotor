@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://b4cddx6q6lunt"]
 
 [ext_resource type="Script" path="res://src/Loupe/Loupe.gd" id="1_j4vti"]
-[ext_resource type="Texture2D" uid="uid://dlpsj3em4h2bp" path="res://icon.svg" id="2_1pc7a"]
 [ext_resource type="Script" path="res://src/Loupe/LoupeObject.gd" id="2_hcb04"]
+[ext_resource type="Texture2D" uid="uid://dqah6ybyap317" path="res://assets/tile_0000.png" id="3_gmhit"]
 [ext_resource type="AudioStream" uid="uid://dgl8er6ls2cwo" path="res://assets/sounds/plouf.wav" id="4_tws2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ihy4j"]
@@ -23,8 +23,7 @@ collision_mask = 0
 script = ExtResource("2_hcb04")
 
 [node name="Sprite2D" type="Sprite2D" parent="Loupe"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_1pc7a")
+texture = ExtResource("3_gmhit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Loupe"]
 position = Vector2(0, -0.25)
