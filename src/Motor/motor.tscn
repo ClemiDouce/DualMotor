@@ -54,6 +54,9 @@ linear_accel_min = -20.84
 linear_accel_max = 12.5
 scale_min = 0.1
 scale_max = 0.3
+color_ramp = SubResource("GradientTexture1D_emcgl")
+hue_variation_min = -0.99
+hue_variation_max = 1.0
 anim_offset_max = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cutiv"]

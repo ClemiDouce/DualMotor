@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PlayerMoveSet" load_steps=2 format=3 uid="uid://bu4r1w46pyobi"]
+
+[ext_resource type="Script" path="res://src/Player/PlayerMoveSet.gd" id="1_u70ah"]
+
+[resource]
+script = ExtResource("1_u70ah")
+move_right = "p2_right"
+move_left = "p2_left"
+move_down = "p2_down"
+move_up = "p2_up"
+action_1 = "p2_action"

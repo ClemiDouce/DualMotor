@@ -7,6 +7,7 @@ class_name Player
 @onready var detect_area: Area2D = $DetectArea
 
 @export_enum("P1", "P2") var player_number : int
+var move_set : PlayerMoveSet
 @export var SPEED : float = 75.0
 @export var motor : Motor
 
@@ -22,11 +23,16 @@ var is_occupied: bool:
 
 func _ready() -> void:
 	sprite.sprite_frames = load("res://src/Player/player_"+ str(player_number+1) +"_spriteframe.tres")
+	move_set = load("res://src/Player/player_"+str(player_number+1)+"_move_set.tres")
 	$StunDelay.timeout.connect(func(): is_stunned = false)
 
 func _physics_process(_delta):
 	if not is_stunned:
-		direction = Input.get_vector("p1_left", "p1_right", "p1_up", "p1_down")
+		direction = Input.get_vector(
+			move_set.move_left,
+			move_set.move_right,
+			move_set.move_up,
+			move_set.move_down)
 		velocity = direction * SPEED
 		if direction != Vector2.ZERO:
 			var anim_to_play = "run_with" if motor_part else "run"
@@ -47,7 +53,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("action_1"):
+	if Input.is_action_just_pressed(move_set.action_1):
 		grab_motor_part()
 	
 func get_bombed(bomb_position: Vector2, push_force: int = 30, stun_delay: int = 4):
