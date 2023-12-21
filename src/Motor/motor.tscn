@@ -112,3 +112,9 @@ randomness = 0.51
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cutiv")
+
+[node name="ShowEffectDelay" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="ShowEffectDelay" to="." method="_on_show_effect_delay_timeout"]

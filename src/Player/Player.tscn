@@ -38,7 +38,7 @@ position = Vector2(0, -2)
 [node name="GrabArea" type="Area2D" parent="."]
 position = Vector2(0, -10)
 collision_layer = 0
-collision_mask = 322
+collision_mask = 4418
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
 shape = SubResource("CircleShape2D_wmxil")
@@ -52,8 +52,13 @@ collision_mask = 32
 shape = SubResource("CircleShape2D_tlgey")
 debug_color = Color(0.309804, 0.701961, 0.32549, 0.419608)
 
-[node name="StunSprite" type="AnimatedSprite2D" parent="."]
-visible = false
-
-[node name="StunDelay" type="Timer" parent="."]
+[node name="LoupeDelay" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
+
+[node name="SpeedEffectDelay" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="LoupeDelay" to="." method="drop_the_loupe"]
+[connection signal="timeout" from="SpeedEffectDelay" to="." method="_on_speed_effect_delay_timeout"]

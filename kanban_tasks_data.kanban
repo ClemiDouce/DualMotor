@@ -22,7 +22,10 @@
 		{
 			"uuid": "7831d6e5-e807-435b-aced-f141294ef9ef",
 			"title": "Done",
-			"tasks": []
+			"tasks": [
+				"fd78d7b8-640a-40b1-89c4-dc013e748347",
+				"a32a192b-236f-4986-a748-2285cdf39e82"
+			]
 		}
 	],
 	"tasks": [
@@ -41,7 +44,7 @@
 			"steps": [
 				{
 					"details": "Afficher Score",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Ecran de menu",
@@ -56,6 +59,33 @@
 					"done": false
 				}
 			]
+		},
+		{
+			"uuid": "fd78d7b8-640a-40b1-89c4-dc013e748347",
+			"title": "Vol d'objet",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": [
+				{
+					"details": "Detecter la clé de l'autre joueur",
+					"done": true
+				},
+				{
+					"details": "Enlever la clé de l'autre joueur",
+					"done": true
+				},
+				{
+					"details": "L'attribuer au nouveau joueur",
+					"done": true
+				}
+			]
+		},
+		{
+			"uuid": "a32a192b-236f-4986-a748-2285cdf39e82",
+			"title": "Generation intelligente d'objet",
+			"description": "",
+			"category": "54007bb4-64d5-447c-941a-6afeef23f688",
+			"steps": []
 		}
 	],
 	"layout": {

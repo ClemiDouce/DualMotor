@@ -11,7 +11,9 @@ class_name Motor
 
 @export var point_depart: Marker2D
 
+var under_show_effect := false
 
+signal verified(correct: bool)
 
 var motor_bp : Dictionary = {}
 var is_correct: bool:
@@ -35,6 +37,11 @@ var parts := {
 func _ready():
 	reset_motor()
 
+func get_anchor():
+	var nodes = get_children()
+	nodes = nodes.filter(func(node): return node is MotorEmplacement)
+	return nodes
+
 func check_parts():
 	parts["top1"] = anchor_top_1.get_part()
 	parts["top2"] = anchor_top_2.get_part()
@@ -49,10 +56,10 @@ func detect_drop_zone():
 		if zone.name == "DropZone":
 			if is_correct:
 				confetti_generator.emitting = true
-				
+				verified.emit(true)
 			else:
 				cross_generator.emitting = true
-				
+				verified.emit(false)
 			await get_tree().create_timer(2).timeout
 			reset_motor()
 		elif zone.name == "TrashZone":
@@ -87,3 +94,14 @@ func reset_motor():
 
 func can_pick(player: Player):
 	return is_complete and player.motor == self
+
+func show_effect():
+	under_show_effect = true
+	for part in get_anchor():
+		part.part_hint.visible = true
+	$ShowEffectDelay.start()
+
+func _on_show_effect_delay_timeout() -> void:
+	for part in get_anchor():
+		part.part_hint.visible = false
+	under_show_effect = false

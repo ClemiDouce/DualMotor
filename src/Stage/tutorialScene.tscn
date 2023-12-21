@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0ya5lfpjhb6b"]
+
+[ext_resource type="FontFile" uid="uid://bqd2htgy70773" path="res://assets/fonts/OstrichSans-Heavy.otf" id="1_m3o7v"]
+[ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="2_ffre1"]
+[ext_resource type="PackedScene" uid="uid://b4cddx6q6lunt" path="res://src/Loupe/Loupe.tscn" id="3_q6f88"]
+[ext_resource type="PackedScene" uid="uid://bon006om1v6d3" path="res://src/Button/press_button.tscn" id="4_eu0gv"]
+
+[sub_resource type="Theme" id="Theme_uxxkx"]
+default_font = ExtResource("1_m3o7v")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wdlo4"]
+font_size = 14
+
+[node name="TutorialScene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_uxxkx")
+
+[node name="HFlowContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -94.0
+offset_right = 162.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HFlowContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HFlowContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.772549, 0.964706, 1)
+text = "Player 1"
+
+[node name="Control" type="Control" parent="CanvasLayer/Control/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/HFlowContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HFlowContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.972549, 0.235294, 0.317647, 1)
+text = "Player 2"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 177.0
+offset_right = 269.0
+offset_bottom = 216.0
+text = "Appuyez sur le bouton en
+meme temps pour 
+commencer la partie !"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 4.0
+offset_right = 271.0
+offset_bottom = 43.0
+text = "Attrapez la loupe et approchez la de votre moteur pour voir de quel composant vous avez besoin"
+label_settings = SubResource("LabelSettings_wdlo4")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Player" parent="." instance=ExtResource("2_ffre1")]
+position = Vector2(50, 66)
+player_number = 0
+SPEED = 120.0
+
+[node name="Player2" parent="." instance=ExtResource("2_ffre1")]
+position = Vector2(326, 67)
+
+[node name="Socle" parent="." instance=ExtResource("3_q6f88")]
+position = Vector2(184, 59)
+
+[node name="PressButton" parent="." node_paths=PackedStringArray("can_push") instance=ExtResource("4_eu0gv")]
+position = Vector2(50, 170)
+can_push = NodePath("../Player")
+
+[node name="PressButton2" parent="." node_paths=PackedStringArray("can_push") instance=ExtResource("4_eu0gv")]
+position = Vector2(324, 170)
+can_push = NodePath("../Player2")

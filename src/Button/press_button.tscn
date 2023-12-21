@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bon006om1v6d3"]
+
+[ext_resource type="Texture2D" uid="uid://bjd8tsfbyvyvl" path="res://assets/button.png" id="1_o6vgg"]
+[ext_resource type="Script" path="res://src/Button/press_button.gd" id="1_ofjqh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q7dyp"]
+radius = 21.0
+
+[node name="PressButton" type="Area2D"]
+collision_layer = 4096
+collision_mask = 0
+script = ExtResource("1_ofjqh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o6vgg")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q7dyp")
+
+[node name="UnpressDelay" type="Timer" parent="."]
+
+[connection signal="timeout" from="UnpressDelay" to="." method="_on_unpress_delay_timeout"]

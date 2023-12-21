@@ -1,12 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv7uducuauva6"]
+[gd_scene load_steps=24 format=3 uid="uid://cv7uducuauva6"]
 
 [ext_resource type="Script" path="res://src/Stage/Stage.gd" id="1_s5e0i"]
 [ext_resource type="PackedScene" uid="uid://mt3051ftkf07" path="res://src/Player/Player.tscn" id="1_schre"]
 [ext_resource type="PackedScene" uid="uid://cb38xyy565yi0" path="res://src/Motor/motor.tscn" id="3_i11p8"]
 [ext_resource type="PackedScene" uid="uid://db5nv4hhes7d0" path="res://src/MotorPartSpawner/motor_part_spawner.tscn" id="4_y2801"]
 [ext_resource type="PackedScene" uid="uid://b4cddx6q6lunt" path="res://src/Loupe/Loupe.tscn" id="5_gxl3p"]
+[ext_resource type="Texture2D" uid="uid://dgvfspksd0qum" path="res://assets/zone_livraison.png" id="5_twmmo"]
 [ext_resource type="FontFile" uid="uid://bqd2htgy70773" path="res://assets/fonts/OstrichSans-Heavy.otf" id="6_skbhh"]
 [ext_resource type="FontFile" uid="uid://rm8llbag7uyg" path="res://assets/fonts/score_font.tres" id="7_fb44k"]
+[ext_resource type="PackedScene" uid="uid://bon006om1v6d3" path="res://src/Button/press_button.tscn" id="8_y84m3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe1od"]
+size = Vector2(75, 40)
 
 [sub_resource type="Curve" id="Curve_2rxnb"]
 bake_resolution = 1000
@@ -22,16 +27,120 @@ size = Vector2(380, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_layel"]
 size = Vector2(380, 3)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe1od"]
-size = Vector2(73, 38)
+[sub_resource type="Theme" id="Theme_bc2kb"]
+default_font = ExtResource("6_skbhh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_q88ul"]
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_ilqld"]
 
 [sub_resource type="Theme" id="Theme_n7kya"]
 default_font = ExtResource("6_skbhh")
 
+[sub_resource type="LabelSettings" id="LabelSettings_61t1v"]
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_er2nh"]
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_yk4ib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/Control/Label3:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["TROIS"]
+}
+
+[sub_resource type="Animation" id="Animation_kqjor"]
+resource_name = "start_game"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/Control/Label3:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.1, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["TROIS", "Deux", "UN", "MONTEZ !"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionLayer/Control/Label3:label_settings:font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.1, 1.6, 2.1, 2.6, 3.1, 3.6),
+"transitions": PackedFloat32Array(1, 1e+06, 1, 1e+06, 1, 1e+06, 1, 1e+06),
+"update": 0,
+"values": [18, 90, 18, 90, 18, 90, 18, 90]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2],
+"method": &"@game_state_setter"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eos24"]
+_data = {
+"RESET": SubResource("Animation_yk4ib"),
+"start_game": SubResource("Animation_kqjor")
+}
+
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_s5e0i")
-metadata/_edit_horizontal_guides_ = [110.0, 80.0, 140.0]
-metadata/_edit_vertical_guides_ = [180.0]
+metadata/_edit_horizontal_guides_ = [110.0, 80.0, 140.0, 167.0]
+metadata/_edit_vertical_guides_ = [180.0, 90.0, 270.0]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="PressButton_p1" parent="Node2D" node_paths=PackedStringArray("can_push", "linked_motor") instance=ExtResource("8_y84m3")]
+unique_name_in_owner = true
+position = Vector2(33, 190)
+can_push = NodePath("../../Player_1")
+linked_motor = NodePath("../../MotorP1")
+tutorial_mode = true
+
+[node name="PressButton_p2" parent="Node2D" node_paths=PackedStringArray("can_push", "linked_motor") instance=ExtResource("8_y84m3")]
+unique_name_in_owner = true
+position = Vector2(347, 192)
+can_push = NodePath("../../Player_2")
+linked_motor = NodePath("../../MotorP2")
+tutorial_mode = true
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="DropZone" type="Area2D" parent="Zones"]
+position = Vector2(180, 185)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/DropZone"]
+shape = SubResource("RectangleShape2D_fe1od")
+debug_color = Color(0.258824, 0.701961, 0.12549, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Zones/DropZone"]
+texture = ExtResource("5_twmmo")
 
 [node name="MotorP1" parent="." node_paths=PackedStringArray("point_depart") instance=ExtResource("3_i11p8")]
 position = Vector2(90, 110)
@@ -53,15 +162,13 @@ width_curve = SubResource("Curve_2rxnb")
 
 [node name="Player_1" parent="." node_paths=PackedStringArray("motor") instance=ExtResource("1_schre")]
 y_sort_enabled = true
-position = Vector2(46, 115)
+position = Vector2(49, 66)
 player_number = 0
-SPEED = 120.0
 motor = NodePath("../MotorP1")
 
 [node name="Player_2" parent="." node_paths=PackedStringArray("motor") instance=ExtResource("1_schre")]
 y_sort_enabled = true
-position = Vector2(331, 63)
-SPEED = 120.0
+position = Vector2(327, 64)
 motor = NodePath("../MotorP2")
 
 [node name="Walls" type="Node2D" parent="."]
@@ -98,17 +205,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 shape = SubResource("RectangleShape2D_layel")
 
-[node name="Zones" type="Node2D" parent="."]
-
-[node name="DropZone" type="Area2D" parent="Zones"]
-position = Vector2(180, 185)
-collision_layer = 128
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/DropZone"]
-shape = SubResource("RectangleShape2D_fe1od")
-debug_color = Color(0.258824, 0.701961, 0.12549, 0.419608)
-
 [node name="MotorEmplacement" type="Node2D" parent="."]
 
 [node name="PointDepartMotor1" type="Marker2D" parent="MotorEmplacement"]
@@ -121,15 +217,122 @@ position = Vector2(270, 110)
 position = Vector2(180, 68)
 
 [node name="MotorPartSpawner" parent="." instance=ExtResource("4_y2801")]
-MAX_PART_ON_SCREEN = 15
-spawn_zone = Rect2(20, 30, 340, 180)
+MAX_PART_ON_SCREEN = 20
+spawn_zone = Rect2(20, 30, 340, 130)
 
-[node name="GameStart" type="Timer" parent="."]
+[node name="GameTime" type="Timer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="TutorialLayer" type="CanvasLayer" parent="."]
 layer = -1
+visible = false
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="TutorialLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bc2kb")
+
+[node name="HFlowContainer" type="HBoxContainer" parent="TutorialLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -94.0
+offset_right = 162.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialLayer/Control/HFlowContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TutorialLayer/Control/HFlowContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.772549, 0.964706, 1)
+text = "Player 1"
+
+[node name="Control" type="Control" parent="TutorialLayer/Control/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TutorialLayer/Control/HFlowContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TutorialLayer/Control/HFlowContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.972549, 0.235294, 0.317647, 1)
+text = "Player 2"
+
+[node name="Label" type="Label" parent="TutorialLayer/Control"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 112.0
+offset_right = 249.0
+offset_bottom = 151.0
+text = "Appuyez sur le bouton en
+meme temps pour 
+commencer la partie !"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialLayer/Control"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 35.0
+offset_right = 167.0
+offset_bottom = 74.0
+text = "Loupe : Permet de voir les composant voulu sur le moteur"
+label_settings = SubResource("LabelSettings_q88ul")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="TutorialLayer/Control"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 35.0
+offset_right = 318.0
+offset_bottom = 84.0
+text = "Bouton d'action : A
+Attraper, lancer et poser les Objet
+"
+label_settings = SubResource("LabelSettings_ilqld")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="TutorialLayer/Control"]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 127.0
+offset_right = 374.0
+offset_bottom = 176.0
+text = "Bouton : Enlever les composants de son moteur
+"
+label_settings = SubResource("LabelSettings_ilqld")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="TutorialLayer/Control"]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 181.0
+offset_right = 314.0
+offset_bottom = 194.0
+text = "<- Zone de depot
+"
+label_settings = SubResource("LabelSettings_ilqld")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GameLayer" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+
+[node name="Control" type="Control" parent="GameLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,7 +341,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_n7kya")
 
-[node name="HFlowContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+[node name="HFlowContainer" type="HBoxContainer" parent="GameLayer/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -152,15 +355,15 @@ offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HFlowContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameLayer/Control/HFlowContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HFlowContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GameLayer/Control/HFlowContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.172549, 0.772549, 0.964706, 1)
 text = "Player 1"
 
-[node name="ScoreP1" type="Label" parent="CanvasLayer/Control/HFlowContainer/VBoxContainer"]
+[node name="ScoreP1" type="Label" parent="GameLayer/Control/HFlowContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -169,19 +372,19 @@ theme_override_fonts/font = ExtResource("7_fb44k")
 theme_override_font_sizes/font_size = 64
 text = "0"
 
-[node name="Control" type="Control" parent="CanvasLayer/Control/HFlowContainer"]
+[node name="Control" type="Control" parent="GameLayer/Control/HFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/HFlowContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameLayer/Control/HFlowContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HFlowContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="GameLayer/Control/HFlowContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.972549, 0.235294, 0.317647, 1)
 text = "Player 2"
 
-[node name="ScoreP2" type="Label" parent="CanvasLayer/Control/HFlowContainer/VBoxContainer2"]
+[node name="ScoreP2" type="Label" parent="GameLayer/Control/HFlowContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -189,3 +392,89 @@ theme_override_colors/font_color = Color(0.972549, 0.235294, 0.317647, 1)
 theme_override_fonts/font = ExtResource("7_fb44k")
 theme_override_font_sizes/font_size = 64
 text = "0"
+
+[node name="CenterContainer" type="CenterContainer" parent="GameLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 19.0
+grow_horizontal = 2
+
+[node name="GameTime" type="Label" parent="GameLayer/Control/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TIME LEFT : 120"
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="Control" type="Control" parent="TransitionLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bc2kb")
+
+[node name="Label3" type="Label" parent="TransitionLayer/Control"]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 86.0
+offset_right = 251.0
+offset_bottom = 135.0
+theme_override_font_sizes/font_size = 18
+text = "TROIS"
+label_settings = SubResource("LabelSettings_61t1v")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ScoreLayer" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+
+[node name="Control" type="Control" parent="ScoreLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bc2kb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScoreLayer/Control"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 29.0
+offset_right = 242.0
+offset_bottom = 69.0
+
+[node name="Announce" type="Label" parent="ScoreLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Le ou la gagnant.e est :"
+label_settings = SubResource("LabelSettings_ilqld")
+horizontal_alignment = 1
+
+[node name="Winner" type="Label" parent="ScoreLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Player 1"
+label_settings = SubResource("LabelSettings_er2nh")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_eos24")
+}
+
+[node name="WinnerEmplacement" type="Marker2D" parent="."]
+position = Vector2(180, 110)
+
+[connection signal="pressed" from="Node2D/PressButton_p1" to="." method="_on_press_button_pressed"]
+[connection signal="pressed" from="Node2D/PressButton_p2" to="." method="_on_press_button_pressed"]
+[connection signal="verified" from="MotorP1" to="." method="_on_motor_p_1_verified"]
+[connection signal="verified" from="MotorP2" to="." method="_on_motor_p_2_verified"]
+[connection signal="timeout" from="GameTime" to="." method="_on_game_time_timeout"]

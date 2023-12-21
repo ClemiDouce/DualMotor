@@ -12,6 +12,7 @@ var FRICTION = 250
 
 var throwed = false
 var falling = true
+var lifted_by : Player = null
 var is_mounted = false:
 	set(new_value):
 		is_mounted = new_value
@@ -50,16 +51,10 @@ func _process(delta: float) -> void:
 	
 func throw(new_velocity: Vector2):
 	self.velocity = new_velocity
+	lifted_by = null
 	throwed = true
 
-#func _on_delay_label_animation_finished() -> void:
-	#delay_label.visible = false
-	#bomb_explode()
-	
-
-
-
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	if !falling:
+	if !falling and !is_mounted:
 		mounted.emit()
 		queue_free()

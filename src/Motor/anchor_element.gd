@@ -54,4 +54,5 @@ func _on_show_area_area_entered(_area: Area2D) -> void:
 
 
 func _on_show_area_area_exited(_area: Area2D) -> void:
-	part_hint.visible = false
+	if not (owner as Motor).under_show_effect:
+		part_hint.visible = false
